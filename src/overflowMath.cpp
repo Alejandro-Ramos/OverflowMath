@@ -22,19 +22,55 @@
  *  operators while preventing integer overflows and underflows.
  */
 
-#ifndef OVERFLOWMATH_HPP // for inclusion guard
-#define OVERFLOWMATH_HPP
-
 namespace overflowMath {
     // Addition functions to stop overflow
     signed long int add(const signed long int& num,
                         const signed long int& modifier,
                         const signed long int& minNum,
-                        const signed long int& maxNum);
+                        const signed long int& maxNum) {
+
+        // If they gave a negative modifier, then it is like
+        // 3 + (-3) = 0. It is just like 3 - 3 = 0, so send it to the
+        // subtraction function
+        if (modifier < 0) {
+            return subtract(num, modifier, minNum, maxNum);
+
+        // Check for integer overflows
+        } else if (num + modifier < num || num + modifier < modifier
+            // Check if it goes over the max number
+                                        || num + modifier > maxNum) {
+            // It overflowed, so make it the max possible number that doesn't
+            // overflow
+            return maxNum;
+        } else {
+            // It won't overflow, so it is safe to perform the operation
+            return (num + modifier);
+        }
+    }
+
     unsigned long int add(const unsigned long int& num,
                           const unsigned long int& modifier,
                           const unsigned long int& minNum,
-                          const unsigned long int& maxNum);
+                          const unsigned long int& maxNum) {
+
+        // If they gave a negative modifier, then it is like
+        // 3 + (-3) = 0. It is just like 3 - 3 = 0, so send it to the
+        // subtraction function
+        if (modifier < 0) {
+            return subtract(num, modifier, minNum, maxNum);
+
+        // Check for integer overflows
+        } else if (num + modifier < num || num + modifier < modifier
+            // Check if it goes over the max number
+                                        || num + modifier > maxNum) {
+            // It overflowed, so make it the max possible number that doesn't
+            // overflow
+            return maxNum;
+        } else {
+            // It won't overflow, so it is safe to perform the operation
+            return (num + modifier);
+        }
+    }
 
     // Subtraction
     signed long int subtract(const signed long int& num,
@@ -66,4 +102,3 @@ namespace overflowMath {
                              const unsigned long int& minNum,
                              const unsigned long int& maxNum);
 }
-#endif // inclusion guard
