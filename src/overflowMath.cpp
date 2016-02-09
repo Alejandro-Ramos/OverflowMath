@@ -53,16 +53,10 @@ namespace overflowMath {
                           const unsigned long int& minNum,
                           const unsigned long int& maxNum) {
 
-        // If they gave a negative modifier, then it is like
-        // 3 + (-3) = 0. It is just like 3 - 3 = 0, so send it to the
-        // subtraction function
-        if (modifier < 0) {
-            return subtract(num, modifier, minNum, maxNum);
-
         // Check for integer overflows
-        } else if (num + modifier < num
+        } if (num + modifier < num
             // Check if it goes over the max number
-                || num + modifier > maxNum) {
+           || num + modifier > maxNum) {
             // It overflowed, so make it the max possible number that doesn't
             // overflow
             return maxNum;
@@ -96,21 +90,16 @@ namespace overflowMath {
             return (num + modifier);
         }
     }
+
     unsigned long int subtract(const unsigned long int& num,
-                               const signed long int& modifier,
+                               const unsigned long int& modifier,
                                const unsigned long int& minNum,
                                const unsigned long int& maxNum) {
 
-        // If they gave a negative modifier, then it is like
-        // 3 - (-3) = 6. It is the same as 3 + 3 = 6, so send it to the
-        // addition function
-        if (modifier > 0) {
-            return add(num, modifier, minNum, maxNum);
-
         // Check for integer overflows
-        } else if (num - modifier > num
+        if (num - modifier > num
             // Check if it goes under the min number
-                || num - modifier < minNum) {
+         || num - modifier < minNum) {
             // It overflowed, so make it the min possible number that doesn't
             // overflow
             return minNum;

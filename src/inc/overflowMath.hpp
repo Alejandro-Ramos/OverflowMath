@@ -42,7 +42,7 @@ namespace overflowMath {
                              const signed long int& minNum,
                              const signed long int& maxNum);
     unsigned long int subtract(const unsigned long int& num,
-                               const signed long int& modifier,
+                               const unsigned long int& modifier,
                                const unsigned long int& minNum,
                                const unsigned long int& maxNum);
 
