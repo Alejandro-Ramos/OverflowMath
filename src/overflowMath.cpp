@@ -175,6 +175,11 @@ namespace overflowMath {
         // If the number becomes too small, make it the minNum
         } else if (num / modifier < minNum) {
             return minNum;
+
+        // If the number becomes too large (two negative numbers), make it
+        // the maxNum
+        } else if (num / modifier > maxNum) {
+            return maxNum;
         } else {
             // It won't overflow, so it is safe to perform the operation
             return (num / modifier);
@@ -192,6 +197,11 @@ namespace overflowMath {
         // If the number becomes too small, make it the minNum
         } else if (num / modifier < minNum) {
             return minNum;
+
+        // If the number becomes too large (two negative numbers), make it
+        // the maxNum
+        } else if (num / modifier > maxNum) {
+            return maxNum;
         } else {
             // It won't overflow, so it is safe to perform the operation
             return (num / modifier);
