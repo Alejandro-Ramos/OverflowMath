@@ -16,7 +16,7 @@ It is still in very early stages, but more will come soon.
 ### LICENSE
 
 This project will use the GNU LGPLv3. More information can be found in the
-LICENSE file.
+LICENSE.txt file.
 
 --------------------------------
 
