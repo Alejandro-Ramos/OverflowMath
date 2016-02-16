@@ -22,6 +22,9 @@
  *  operators while preventing integer overflows and underflows.
  */
 
+#include "inc/overflowMath.hpp"
+#include <cstdlib> // for abs
+
 namespace overflowMath {
     // Addition functions to stop overflow
     signed long int add(const signed long int& num,
@@ -33,7 +36,7 @@ namespace overflowMath {
         // 3 + (-3) = 0. It is just like 3 - 3 = 0, so send it to the
         // subtraction function
         if (modifier < 0) {
-            return subtract(num, modifier, minNum, maxNum);
+            return subtract(num, abs(modifier), minNum, maxNum);
 
         // Check for integer overflows
         } else if (num + modifier < num
@@ -54,9 +57,9 @@ namespace overflowMath {
                           const unsigned long int& maxNum) {
 
         // Check for integer overflows
-        } if (num + modifier < num
+        if (num + modifier < num
             // Check if it goes over the max number
-           || num + modifier > maxNum) {
+         || num + modifier > maxNum) {
             // It overflowed, so make it the max possible number that doesn't
             // overflow
             return maxNum;
@@ -75,8 +78,8 @@ namespace overflowMath {
         // If they gave a negative modifier, then it is like
         // 3 - (-3) = 6. It is the same as 3 + 3 = 6, so send it to the
         // addition function
-        if (modifier > 0) {
-            return add(num, modifier, minNum, maxNum);
+        if (modifier < 0) {
+            return add(num, abs(modifier), minNum, maxNum);
 
         // Check for integer overflows
         } else if (num - modifier > num
@@ -87,7 +90,7 @@ namespace overflowMath {
             return minNum;
         } else {
             // It won't overflow, so it is safe to perform the operation
-            return (num + modifier);
+            return (num - modifier);
         }
     }
 
@@ -105,7 +108,7 @@ namespace overflowMath {
             return minNum;
         } else {
             // It won't overflow, so it is safe to perform the operation
-            return (num + modifier);
+            return (num - modifier);
         }
     }
 
