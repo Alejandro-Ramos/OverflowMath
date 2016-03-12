@@ -129,39 +129,44 @@ void test(unsigned long int num, unsigned long int modifier,
 
 void addTest() {
     test(100, 200, std::numeric_limits<signed char>::min(),
-        (signed long int)std::numeric_limits<signed char>::max());
+        (signed long int)std::numeric_limits<signed char>::max(),
+        "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(50, 75, std::numeric_limits<signed char>::min(),
-        (signed long int)100);
+        (signed long int)100, "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(-100, -100, std::numeric_limits<signed char>::min(),
-        (signed long int)std::numeric_limits<signed char>::max());
+        (signed long int)std::numeric_limits<signed char>::max(),
+        "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     test(50, -100, 0,
-        (signed long int)std::numeric_limits<signed char>::max());
+        (signed long int)std::numeric_limits<signed char>::max(),
+        "signed char", 0);
 }
 
 void subtractTest() {
     test(-100, 100, std::numeric_limits<signed char>::min(),
-        (signed long int)std::numeric_limits<signed char>::max());
+        (signed long int)std::numeric_limits<signed char>::max(),
+        "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(100, -100, std::numeric_limits<signed char>::min(),
-        (signed long int)std::numeric_limits<signed char>::max());
+        (signed long int)std::numeric_limits<signed char>::max(),
+        "signed char", 0);
     std::cout << "Press enter to continue with the tests" << '\n';
     std::cin.ignore(std::numeric_limits<std::steamsize>::max(), '\n');
 
-    test(100, 50, 75, (signed long int)100);
+    test(100, 50, 75, (signed long int)100, "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    test(0, -100, -50, (signed long int)75);
+    test(0, -100, -50, (signed long int)75, "signed char", 0);
     std::cout << '\n' << "Press enter to select another function to test"
               << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
