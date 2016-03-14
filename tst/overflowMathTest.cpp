@@ -23,13 +23,16 @@
 
 #include <iostream>
 #include <climits>
+#include <string>
 #include "../src/inc/overflowMath.hpp"
 
 void addTest();
 void test(signed long int num, signed long int modifier,
-          signed long int minNum, signed long int maxNum);
+          signed long int minNum, signed long int maxNum,
+          std::string datatype, char operation);
 void test(unsigned long int num, unsigned long int modifier,
-          unsigned long int minNum, unsigned long int maxNum);
+          unsigned long int minNum, unsigned long int maxNum,
+          std::string datatype, char operation);
 void subtractTest();
 
 int main() {
@@ -82,21 +85,21 @@ void test(signed long int num, signed long int modifier,
     std::cout << "Result = " << std::flush;
     switch (operation) {
         case 0: // add
-            std::cout << overflowMath::add(num, modifier, minNum,
-                (signed long int)maxNum) << std::endl;
+            std::cout << overflowMath::add(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
             break;
         case 1: // subtract
-            std::cout << overflowMath::subtract(num, modifer, minNum
-                (signed long int)maxNum) << std::endl;
+            std::cout << overflowMath::subtract(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
             break;
-        case 2: // multiply
+        /*case 2: // multiply
             std::cout << overflowMath::multiply(num, modifier, minNum
                 (signed long int)maxNum) << std::endl;
             break;
         case 3: // divide
             std::cout << overflowMath::divide(num, modifer, minNum
                 (signed long int)maxNum) << std::endl;
-            break;
+            break; */
     }
 }
 void test(unsigned long int num, unsigned long int modifier,
@@ -108,22 +111,22 @@ void test(unsigned long int num, unsigned long int modifier,
     std::cout << datatype << " maxNum = " << maxNum << '\n';
     std::cout << "Result = " << std::flush;
     switch (operation) {
-        case 0: // add
-            std::cout << overflowMath::add(num, modifier, minNum,
-                (unsigned long int)maxNum) << std::endl;
-            break;
-        case 1: // subtract
-            std::cout << overflowMath::subtract(num, modifer, minNum
-                (unsigned long int)maxNum) << std::endl;
-            break;
-        case 2: // multiply
-            std::cout << overflowMath::multiply(num, modifier, minNum
-                (unsigned long int)maxNum) << std::endl;
-            break;
+    case 0: // add
+        std::cout << overflowMath::add(num, modifier, minNum, maxNum);
+        std::cout << std::endl;
+        break;
+    case 1: // subtract
+        std::cout << overflowMath::subtract(num, modifier, minNum, maxNum);
+        std::cout << std::endl;
+        break;
+        /*case 2: // multiply
+        std::cout << overflowMath::multiply(num, modifier, minNum
+        (signed long int)maxNum) << std::endl;
+        break;
         case 3: // divide
-            std::cout << overflowMath::divide(num, modifer, minNum
-                (unsigned long int)maxNum) << std::endl;
-            break;
+        std::cout << overflowMath::divide(num, modifer, minNum
+        (signed long int)maxNum) << std::endl;
+        break; */
     }
 }
 
@@ -160,7 +163,7 @@ void subtractTest() {
         (signed long int)std::numeric_limits<signed char>::max(),
         "signed char", 0);
     std::cout << "Press enter to continue with the tests" << '\n';
-    std::cin.ignore(std::numeric_limits<std::steamsize>::max(), '\n');
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(100, 50, 75, (signed long int)100, "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
