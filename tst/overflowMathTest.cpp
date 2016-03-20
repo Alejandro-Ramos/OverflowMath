@@ -34,6 +34,7 @@ void test(unsigned long int num, unsigned long int modifier,
           unsigned long int minNum, unsigned long int maxNum,
           std::string datatype, char operation);
 void subtractTest();
+void manualTest();
 
 int main() {
     bool hasRunBefore = false;
@@ -47,12 +48,13 @@ int main() {
         }
         std::cout << "Select a function to test" << '\n';
         std::cout << "(0) - End program" << '\n';
-        std::cout << "(1) - add" << '\n';
-        std::cout << "(2) - subtract" << '\n';
+        std::cout << "(1) - Manual test" << '\n';
+        std::cout << "(2) - add" << '\n';
+        std::cout << "(3) - subtract" << '\n';
         std::cout << "Selection: ";
         std::cin >> selection;
         if (std::cin.fail() ||
-            !(selection >= 0) || !(selection <= 2)) {
+            !(selection >= 0) || !(selection <= 3)) {
             std::cout << "Invalid input" << std::endl;
             return 1;
         }
@@ -64,10 +66,14 @@ int main() {
                 return 0;
                 break;
             case 1:
+                std::cout << "Manual test" << '\n' << std::endl;
+                manualTest();
+                break;
+            case 2:
                 std::cout << "Testing add" << '\n' << std::endl;
                 addTest();
                 break;
-            case 2:
+            case 3:
                 std::cout << "Testing subtract" << '\n' << std::endl;
                 subtractTest();
                 break;
@@ -173,4 +179,160 @@ void subtractTest() {
     std::cout << '\n' << "Press enter to select another function to test"
               << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+/*  Function to allow manual testing of the functions in OverflowMath
+ *  It is very long, with a lot of code repetition, so I may decide to make
+ *  it smaller or split it into smaller parts at a future date.
+ */
+void manualTest() {
+    char selection;
+    bool isSigned = true;
+    bool error = false;
+    char operation;
+
+    unsigned long int unsignedNum;
+    unsigned long int unsignedModifier;
+    unsigned long int unsignedMinNum;
+    unsigned long int unsignedMaxNum;
+
+    signed long int signedNum;
+    signed long int signedModifier;
+    signed long int signedMinNum;
+    signed long int signedMaxNum;
+
+    std::cout << "Each operation takes the values of 'num, 'modifier',\n";
+    std::cout << "'minNum', and 'maxNum'.\n\n";
+
+    // get datatype
+    do {
+        std::cout << "Enter 0 for signed, or 1 for unsigned long int" << '\n';
+        std::cout << "signed long int can go from ";
+        std::cout << std::numeric_limits<signed long int>::min();
+        std::cout << " to ";
+        std::cout << std::numeric_limits<signed long int>::max() << '\n';
+        std::cout << "unsigned long int can go from ";
+        std::cout << std::numeric_limits<unsigned long int>::min();
+        std::cout << " to ";
+        std::cout << std::numeric_limits<unsigned long int>::max() << '\n';
+        std::cin >> selection;
+        if (std::cin.fail() ||
+            !(selection >= '0') || !(selection <= '1')) {
+            std::cout << "Invalid input" << std::endl;
+            error = true;
+        } else {
+            error = false;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (error);
+    if (selection == '1') isSigned = false;
+
+    // get num value
+    do {
+        std::cout << "num ";
+        if (isSigned) {
+            std::cout << "(signed) = ";
+            std::cin >> signedNum;
+        } else {
+            std::cout << "(unsigned) = ";
+            std::cin >> unsignedNum;
+        }
+        if (std::cin.fail()) {
+            std::cout << "Invalid input" << std::endl;
+            error = true;
+        } else {
+            error = false;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (error);
+
+    // get modifier value
+    do {
+        std::cout << "modifier ";
+        if (isSigned) {
+            std::cout << "(signed) = ";
+            std::cin >> signedModifier;
+        } else {
+            std::cout << "(unsigned) = ";
+            std::cin >> unsignedModifier;
+        }
+        if (std::cin.fail()) {
+            std::cout << "Invalid input" << std::endl;
+            error = true;
+        } else {
+            error = false;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (error);
+
+    // get minNum value
+    do {
+        std::cout << "minNum ";
+        if (isSigned) {
+            std::cout << "(signed) = ";
+            std::cin >> signedMinNum;
+        } else {
+            std::cout << "(unsigned) = ";
+            std::cin >> unsignedMinNum;
+        }
+        if (std::cin.fail()) {
+            std::cout << "Invalid input" << std::endl;
+            error = true;
+        } else {
+            error = false;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (error);
+
+    // get maxNum value
+    do {
+        std::cout << "maxNum ";
+        if (isSigned) {
+            std::cout << "(signed) = ";
+            std::cin >> signedMaxNum;
+        } else {
+            std::cout << "(unsigned) = ";
+            std::cin >> unsignedMaxNum;
+        }
+        if (std::cin.fail()) {
+            std::cout << "Invalid input" << std::endl;
+            error = true;
+        } else {
+            error = false;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (error);
+    std::cout << "Please select an operation to perform\n";
+    do {
+        std::cout << "(0) Addition" << '\n';
+        std::cout << "(1) Subtraction" << '\n';
+        std::cin >> operation;
+        if (std::cin.fail() ||
+            !(operation >= '0') || !(operation <= '1')) {
+            std::cout << "Invalid input" << std::endl;
+            error = true;
+        }
+        else {
+            error = false;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (error);
+
+    // the ascii codes for numbers start at 48, so one can subtract 48 to get
+    // the number the ascii code represents
+    operation = operation - 48;
+    std::cout << "All parameters entered, testing operation" << std::endl;
+    if (isSigned) {
+        test((signed long int)signedNum, signedModifier, signedMinNum,
+            signedMaxNum, "signed long int", operation);
+    } else {
+        test((unsigned long int)unsignedNum, unsignedModifier, unsignedMinNum,
+            unsignedMaxNum, "unsigned long int", operation);
+    }
 }
