@@ -34,6 +34,7 @@ void test(unsigned long int num, unsigned long int modifier,
           unsigned long int minNum, unsigned long int maxNum,
           std::string datatype, char operation);
 void subtractTest();
+void multiplyTest();
 void manualTest();
 
 int main() {
@@ -51,10 +52,10 @@ int main() {
         std::cout << "(1) - Manual test" << '\n';
         std::cout << "(2) - add" << '\n';
         std::cout << "(3) - subtract" << '\n';
+        std::cout << "(4) - multiply" << '\n';
         std::cout << "Selection: ";
         std::cin >> selection;
-        if (std::cin.fail() ||
-            !(selection >= 0) || !(selection <= 3)) {
+        if (std::cin.fail() || !(selection <= 4)) {
             std::cout << "Invalid input" << std::endl;
             return 1;
         }
@@ -98,11 +99,11 @@ void test(signed long int num, signed long int modifier,
             std::cout << overflowMath::subtract(num, modifier, minNum, maxNum);
             std::cout << std::endl;
             break;
-        /*case 2: // multiply
+        case 2: // multiply
             std::cout << overflowMath::multiply(num, modifier, minNum
                 (signed long int)maxNum) << std::endl;
             break;
-        case 3: // divide
+        /*case 3: // divide
             std::cout << overflowMath::divide(num, modifer, minNum
                 (signed long int)maxNum) << std::endl;
             break; */
@@ -117,19 +118,19 @@ void test(unsigned long int num, unsigned long int modifier,
     std::cout << datatype << " maxNum = " << maxNum << '\n';
     std::cout << "Result = " << std::flush;
     switch (operation) {
-    case 0: // add
-        std::cout << overflowMath::add(num, modifier, minNum, maxNum);
-        std::cout << std::endl;
-        break;
-    case 1: // subtract
-        std::cout << overflowMath::subtract(num, modifier, minNum, maxNum);
-        std::cout << std::endl;
-        break;
-        /*case 2: // multiply
-        std::cout << overflowMath::multiply(num, modifier, minNum
-        (signed long int)maxNum) << std::endl;
-        break;
-        case 3: // divide
+        case 0: // add
+            std::cout << overflowMath::add(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
+            break;
+        case 1: // subtract
+            std::cout << overflowMath::subtract(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
+            break;
+        case 2: // multiply
+            std::cout << overflowMath::multiply(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
+            break;
+        /*case 3: // divide
         std::cout << overflowMath::divide(num, modifer, minNum
         (signed long int)maxNum) << std::endl;
         break; */
@@ -153,29 +154,33 @@ void addTest() {
         "signed char", 0);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     test(50, -100, 0,
         (signed long int)std::numeric_limits<signed char>::max(),
         "signed char", 0);
+    std::cout << "Press enter to select another function to test"
+              << std::endl;
+    std::cin.ignore(std::numeric_limits<signed char>::max(), '\n');
 }
 
 void subtractTest() {
     test(-100, 100, std::numeric_limits<signed char>::min(),
         (signed long int)std::numeric_limits<signed char>::max(),
-        "signed char", 0);
+        "signed char", 1);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(100, -100, std::numeric_limits<signed char>::min(),
         (signed long int)std::numeric_limits<signed char>::max(),
-        "signed char", 0);
+        "signed char", 1);
     std::cout << "Press enter to continue with the tests" << '\n';
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    test(100, 50, 75, (signed long int)100, "signed char", 0);
+    test(100, 50, 75, (signed long int)100, "signed char", 1);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    test(0, -100, -50, (signed long int)75, "signed char", 0);
+    test(0, -100, -50, (signed long int)75, "signed char", 1);
     std::cout << '\n' << "Press enter to select another function to test"
               << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -184,23 +189,23 @@ void subtractTest() {
 void multiplyTest() {
     test(2, 100, std::numeric_limits<signed char>::min(),
          (signed long int)std::numeric_limits<signed char>::max(),
-         "signed char", 0);
+         "signed char", 2);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n';
 
     test(-2, 100, std::numeric_limits<signed char>::min(),
          (signed long int)std::numeric_limits<signed char>::max(),
-         "signed char", 0);
+         "signed char", 2);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n';
 
     test(2, 50, std::numeric_limits<signed char>::min(), (signed long int)75,
-         "signed char", 0);
+         "signed char", 2);
     std::cout << "Press enter to continue with the tests" << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(2, -50, -75, (signed long int)std::numeric_limits<signed char>::min(),
-         "signed char", 0);
+         "signed char", 2);
     std::cout << '\n' << "Press enter to select another function to test"
               << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -360,4 +365,7 @@ void manualTest() {
         test((unsigned long int)unsignedNum, unsignedModifier, unsignedMinNum,
             unsignedMaxNum, "unsigned long int", operation);
     }
+
+    std::cout << "Press enter to select another function to test" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
