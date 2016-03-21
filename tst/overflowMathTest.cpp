@@ -181,6 +181,31 @@ void subtractTest() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+void multiplyTest() {
+    test(2, 100, std::numeric_limits<signed char>::min(),
+         (signed long int)std::numeric_limits<signed char>::max(),
+         "signed char", 0);
+    std::cout << "Press enter to continue with the tests" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n';
+
+    test(-2, 100, std::numeric_limits<signed char>::min(),
+         (signed long int)std::numeric_limits<signed char>::max(),
+         "signed char", 0);
+    std::cout << "Press enter to continue with the tests" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n';
+
+    test(2, 50, std::numeric_limits<signed char>::min(), (signed long int)75,
+         "signed char", 0);
+    std::cout << "Press enter to continue with the tests" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    test(2, -50, -75, (signed long int)std::numeric_limits<signed char>::min(),
+         "signed char", 0);
+    std::cout << '\n' << "Press enter to select another function to test"
+              << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
 /*  Function to allow manual testing of the functions in OverflowMath
  *  It is very long, with a lot of code repetition, so I may decide to make
  *  it smaller or split it into smaller parts at a future date.
