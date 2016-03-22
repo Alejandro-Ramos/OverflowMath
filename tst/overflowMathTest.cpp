@@ -39,7 +39,7 @@ void manualTest();
 
 int main() {
     bool hasRunBefore = false;
-    unsigned short int selection;
+    unsigned char selection;
     std::cout << "Tests for overflowMath library" << '\n' << std::endl;
     while (true) {
         if (hasRunBefore) {
@@ -55,28 +55,35 @@ int main() {
         std::cout << "(4) - multiply" << '\n';
         std::cout << "Selection: ";
         std::cin >> selection;
-        if (std::cin.fail() || !(selection <= 4)) {
+
+        // ('4' - 42) because the ascii codes for integers start at #42.
+        // Subtracting 42 from it gives the actual integer values
+        if (std::cin.fail() || !(selection <= ('4' - 42))) {
             std::cout << "Invalid input" << std::endl;
             return 1;
         }
         std::cin.clear();
         std::cin.ignore();
         switch (selection) {
-            case 0:
+            case '0':
                 std::cout << "Ending program" << '\n' << std::endl;
                 return 0;
                 break;
-            case 1:
+            case '1':
                 std::cout << "Manual test" << '\n' << std::endl;
                 manualTest();
                 break;
-            case 2:
+            case '2':
                 std::cout << "Testing add" << '\n' << std::endl;
                 addTest();
                 break;
-            case 3:
+            case '3':
                 std::cout << "Testing subtract" << '\n' << std::endl;
                 subtractTest();
+                break;
+            case '4':
+                std::cout << "Testing multiply" << '\n' << std::endl;
+                multiplyTest();
                 break;
         }
     }
@@ -100,13 +107,13 @@ void test(signed long int num, signed long int modifier,
             std::cout << std::endl;
             break;
         case 2: // multiply
-            std::cout << overflowMath::multiply(num, modifier, minNum
-                (signed long int)maxNum) << std::endl;
+            std::cout << overflowMath::multiply(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
             break;
-        /*case 3: // divide
-            std::cout << overflowMath::divide(num, modifer, minNum
-                (signed long int)maxNum) << std::endl;
-            break; */
+        case 3: // divide
+            std::cout << overflowMath::divide(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
+            break;
     }
 }
 void test(unsigned long int num, unsigned long int modifier,
@@ -130,10 +137,10 @@ void test(unsigned long int num, unsigned long int modifier,
             std::cout << overflowMath::multiply(num, modifier, minNum, maxNum);
             std::cout << std::endl;
             break;
-        /*case 3: // divide
-        std::cout << overflowMath::divide(num, modifer, minNum
-        (signed long int)maxNum) << std::endl;
-        break; */
+        case 3: // divide
+            std::cout << overflowMath::divide(num, modifier, minNum, maxNum);
+            std::cout << std::endl;
+            break;
     }
 }
 
@@ -191,13 +198,13 @@ void multiplyTest() {
          (signed long int)std::numeric_limits<signed char>::max(),
          "signed char", 2);
     std::cout << "Press enter to continue with the tests" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n';
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(-2, 100, std::numeric_limits<signed char>::min(),
          (signed long int)std::numeric_limits<signed char>::max(),
          "signed char", 2);
     std::cout << "Press enter to continue with the tests" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n';
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     test(2, 50, std::numeric_limits<signed char>::min(), (signed long int)75,
          "signed char", 2);
@@ -341,9 +348,11 @@ void manualTest() {
     do {
         std::cout << "(0) Addition" << '\n';
         std::cout << "(1) Subtraction" << '\n';
+        std::cout << "(2) Multiplication" << '\n';
+        std::cout << "(3) Division" << '\n';
         std::cin >> operation;
         if (std::cin.fail() ||
-            !(operation >= '0') || !(operation <= '1')) {
+            !(operation >= '0') || !(operation <= '3')) {
             std::cout << "Invalid input" << std::endl;
             error = true;
         }
@@ -359,11 +368,11 @@ void manualTest() {
     operation = operation - 48;
     std::cout << "All parameters entered, testing operation" << std::endl;
     if (isSigned) {
-        test((signed long int)signedNum, signedModifier, signedMinNum,
-            signedMaxNum, "signed long int", operation);
+        test(signedNum, signedModifier, signedMinNum, signedMaxNum,
+             "signed long int", operation);
     } else {
-        test((unsigned long int)unsignedNum, unsignedModifier, unsignedMinNum,
-            unsignedMaxNum, "unsigned long int", operation);
+        test(unsignedNum, unsignedModifier, unsignedMinNum, unsignedMaxNum,
+             "unsigned long int", operation);
     }
 
     std::cout << "Press enter to select another function to test" << std::endl;
