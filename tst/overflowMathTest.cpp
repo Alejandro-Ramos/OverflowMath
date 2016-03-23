@@ -35,6 +35,7 @@ void test(unsigned long int num, unsigned long int modifier,
           std::string datatype, char operation);
 void subtractTest();
 void multiplyTest();
+void divideTest();
 void manualTest();
 
 int main() {
@@ -53,12 +54,13 @@ int main() {
         std::cout << "(2) - add" << '\n';
         std::cout << "(3) - subtract" << '\n';
         std::cout << "(4) - multiply" << '\n';
+        std::cout << "(5) - divide" << '\n';
         std::cout << "Selection: ";
         std::cin >> selection;
 
         // ('4' - 42) because the ascii codes for integers start at #42.
         // Subtracting 42 from it gives the actual integer values
-        if (std::cin.fail() || !(selection <= ('4' - 42))) {
+        if (std::cin.fail() || !(selection <= ('5' - 42))) {
             std::cout << "Invalid input" << std::endl;
             return 1;
         }
@@ -84,6 +86,10 @@ int main() {
             case '4':
                 std::cout << "Testing multiply" << '\n' << std::endl;
                 multiplyTest();
+                break;
+            case '5':
+                std::cout << "Testing divide" << '\n' << std::endl;
+                divideTest();
                 break;
         }
     }
@@ -213,6 +219,30 @@ void multiplyTest() {
 
     test(2, -50, -75, (signed long int)std::numeric_limits<signed char>::min(),
          "signed char", 2);
+    std::cout << '\n' << "Press enter to select another function to test"
+              << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+void divideTest() {
+    test(100, 2, 75, (signed long int)std::numeric_limits<signed char>::max(),
+         "signed char", 3);
+    std::cout << "Press enter to continue with the tests" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    test(100, -2, -25,
+         (signed long int)std::numeric_limits<signed char>::max(),
+         "signed char", 3);
+    std::cout << "Press enter to continue with the tests" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    test(100, 5, (signed long int)std::numeric_limits<signed char>::min(),
+         10, "signed char", 3);
+    std::cout << "Press enter to continue with the tests" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    test(100, -5, (signed long int)std::numeric_limits<signed char>::min(),
+         -10, "signed char", 3);
     std::cout << '\n' << "Press enter to select another function to test"
               << std::endl;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
