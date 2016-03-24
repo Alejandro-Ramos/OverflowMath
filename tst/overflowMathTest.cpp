@@ -26,13 +26,13 @@
 #include <string>
 #include "../src/inc/overflowMath.hpp"
 
-void addTest();
 void test(signed long int num, signed long int modifier,
           signed long int minNum, signed long int maxNum,
           std::string datatype, char operation);
 void test(unsigned long int num, unsigned long int modifier,
           unsigned long int minNum, unsigned long int maxNum,
           std::string datatype, char operation);
+void addTest();
 void subtractTest();
 void multiplyTest();
 void divideTest();
@@ -41,34 +41,37 @@ void manualTest();
 int main() {
     bool hasRunBefore = false;
     unsigned char selection;
-    std::cout << "Tests for overflowMath library" << '\n' << std::endl;
+    std::cout << "Tests for the OverflowMath library" << '\n' << std::endl;
     while (true) {
         if (hasRunBefore) {
             std::cout << "\n\n";  // user friendly spacing
         } else {
             hasRunBefore = true;
         }
-        std::cout << "Select a function to test" << '\n';
-        std::cout << "(0) - End program" << '\n';
-        std::cout << "(1) - Manual test" << '\n';
-        std::cout << "(2) - add" << '\n';
-        std::cout << "(3) - subtract" << '\n';
-        std::cout << "(4) - multiply" << '\n';
-        std::cout << "(5) - divide" << '\n';
-        std::cout << "Selection: ";
-        std::cin >> selection;
-
-        // ('4' - 42) because the ascii codes for integers start at #42.
-        // Subtracting 42 from it gives the actual integer values
-        if (std::cin.fail() || !(selection <= ('5' - 42))) {
-            std::cout << "Invalid input" << std::endl;
-            return 1;
-        }
-        std::cin.clear();
-        std::cin.ignore();
+            do {
+            std::cout << "Select a function to test" << '\n';
+            std::cout << "(0) - End program" << '\n';
+            std::cout << "(1) - Manual test" << '\n';
+            std::cout << "(2) - add" << '\n';
+            std::cout << "(3) - subtract" << '\n';
+            std::cout << "(4) - multiply" << '\n';
+            std::cout << "(5) - divide" << '\n';
+            std::cout << "Selection: ";
+            std::cin >> selection;
+            if (std::cin.fail() || selection < '0' || selection > '5') {
+                std::cout << "Invalid input" << std::endl;
+                error = true;
+            } else {
+                error = false;
+            }
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } while (error);
         switch (selection) {
             case '0':
-                std::cout << "Ending program" << '\n' << std::endl;
+                std::cout << "Press enter to end the program" << '\n';
+                std::cout << std::endl;
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 return 0;
                 break;
             case '1':
@@ -93,6 +96,7 @@ int main() {
                 break;
         }
     }
+    return 0;
 }
 
 void test(signed long int num, signed long int modifier,
