@@ -41,6 +41,7 @@ void manualTest();
 int main() {
     bool hasRunBefore = false;
     unsigned char selection;
+    bool error = false;
     std::cout << "Tests for the OverflowMath library" << '\n' << std::endl;
     while (true) {
         if (hasRunBefore) {
