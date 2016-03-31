@@ -26,11 +26,37 @@
 #include <cstdlib> // for abs
 
 namespace overflowMath {
+    // Low level functions for use by the OverflowMath functions only
+    namespace {
+        void fixMinMax(signed long int& minNum,
+                       signed long int& maxNum) {
+            signed long int holder;
+            if (minNum > maxNum) {
+                holder = minNum;
+                minNum = maxNum;
+                maxNum = holder;
+            }
+            return;
+        }
+
+        void fixMinMax(unsigned long int& minNum,
+            unsigned long int& maxNum) {
+            unsigned int holder;
+            if (minNum > maxNum) {
+                holder = minNum;
+                minNum = maxNum;
+                maxNum = holder;
+            }
+            return;
+        }
+    }
+
     // Addition functions to stop overflow
     signed long int add(const signed long int& num,
                         const signed long int& modifier,
-                        const signed long int& minNum,
-                        const signed long int& maxNum) {
+                        signed long int minNum,
+                        signed long int maxNum) {
+        fixMinMax(minNum, maxNum);
 
         // If they gave a negative modifier, then it is like
         // 3 + (-3) = 0. It is just like 3 - 3 = 0, so send it to the
@@ -53,8 +79,9 @@ namespace overflowMath {
 
     unsigned long int add(const unsigned long int& num,
                           const unsigned long int& modifier,
-                          const unsigned long int& minNum,
-                          const unsigned long int& maxNum) {
+                          unsigned long int minNum,
+                          unsigned long int maxNum) {
+        fixMinMax(minNum, maxNum);
 
         // Check for integer overflows
         if (num + modifier < num
@@ -72,8 +99,9 @@ namespace overflowMath {
     // Subtraction
     signed long int subtract(const signed long int& num,
                              const signed long int& modifier,
-                             const signed long int& minNum,
-                             const signed long int& maxNum) {
+                             signed long int minNum,
+                             signed long int maxNum) {
+        fixMinMax(minNum, maxNum);
 
         // If they gave a negative modifier, then it is like
         // 3 - (-3) = 6. It is the same as 3 + 3 = 6, so send it to the
@@ -96,8 +124,9 @@ namespace overflowMath {
 
     unsigned long int subtract(const unsigned long int& num,
                                const unsigned long int& modifier,
-                               const unsigned long int& minNum,
-                               const unsigned long int& maxNum) {
+                               unsigned long int minNum,
+                               unsigned long int maxNum) {
+        fixMinMax(minNum, maxNum);
 
         // Check for integer overflows
         if (num - modifier > num
@@ -115,8 +144,9 @@ namespace overflowMath {
     // Multiplication
     signed long int multiply(const signed long int& num,
                              const signed long int& modifier,
-                             const signed long int& minNum,
-                             const signed long int& maxNum) {
+                             signed long int minNum,
+                             signed long int maxNum) {
+        fixMinMax(minNum, maxNum);
 
         // Check for integer overflows
         if (num * modifier < num || num * modifier < modifier
@@ -145,8 +175,9 @@ namespace overflowMath {
     }
     unsigned long int multiply(const unsigned long int& num,
                                const unsigned long int& modifier,
-                               const unsigned long int& minNum,
-                               const unsigned long int& maxNum) {
+                               unsigned long int minNum,
+                               unsigned long int maxNum) {
+        fixMinMax(minNum, maxNum);
 
         // Check for integer overflows
         if (num * modifier < num || num * modifier < modifier
@@ -168,8 +199,10 @@ namespace overflowMath {
     // Division
     signed long int divide(const signed long int& num,
                            const signed long int& modifier,
-                           const signed long int& minNum,
-                           const signed long int& maxNum) {
+                           signed long int minNum,
+                           signed long int maxNum) {
+        fixMinMax(minNum, maxNum);
+
         if (modifier == 0) {
             // To prevent divide by zero error, do nothing to the number
             // and return the number given.
@@ -190,8 +223,10 @@ namespace overflowMath {
     }
     unsigned long int divide(const unsigned long int& num,
                              const unsigned long int& modifier,
-                             const unsigned long int& minNum,
-                             const unsigned long int& maxNum) {
+                             unsigned long int minNum,
+                             unsigned long int maxNum) {
+        fixMinMax(minNum, maxNum);
+
         if (modifier == 0) {
             // To prevent divide by zero error, do nothing to the number
             // and return the number given.

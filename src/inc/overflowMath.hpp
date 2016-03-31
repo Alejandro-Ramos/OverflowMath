@@ -29,41 +29,41 @@ namespace overflowMath {
     // Addition functions to stop overflow
     signed long int add(const signed long int& num,
                         const signed long int& modifier,
-                        const signed long int& minNum,
-                        const signed long int& maxNum);
+                        signed long int minNum,
+                        signed long int maxNum);
     unsigned long int add(const unsigned long int& num,
                           const unsigned long int& modifier,
-                          const unsigned long int& minNum,
-                          const unsigned long int& maxNum);
+                          unsigned long int minNum,
+                          unsigned long int maxNum);
 
     // Subtraction
     signed long int subtract(const signed long int& num,
                              const signed long int& modifier,
-                             const signed long int& minNum,
-                             const signed long int& maxNum);
+                             signed long int minNum,
+                             signed long int maxNum);
     unsigned long int subtract(const unsigned long int& num,
                                const unsigned long int& modifier,
-                               const unsigned long int& minNum,
-                               const unsigned long int& maxNum);
+                               unsigned long int minNum,
+                               unsigned long int maxNum);
 
     // Multiplication
     signed long int multiply(const signed long int& num,
                              const signed long int& modifier,
-                             const signed long int& minNum,
-                             const signed long int& maxNum);
+                             signed long int minNum,
+                             signed long int maxNum);
     unsigned long int multiply(const unsigned long int& num,
                                const unsigned long int& modifier,
-                               const unsigned long int& minNum,
-                               const unsigned long int& maxNum);
+                               unsigned long int minNum,
+                               unsigned long int maxNum);
 
     // Division
     signed long int divide(const signed long int& num,
                            const signed long int& modifier,
-                           const signed long int& minNum,
-                           const signed long int& maxNum);
+                           signed long int minNum,
+                           signed long int maxNum);
     unsigned long int divide(const unsigned long int& num,
                              const unsigned long int& modifier,
-                             const unsigned long int& minNum,
-                             const unsigned long int& maxNum);
+                             unsigned long int minNum,
+                             unsigned long int maxNum);
 }
 #endif // inclusion guard
