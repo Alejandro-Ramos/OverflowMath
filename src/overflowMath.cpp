@@ -40,7 +40,7 @@ namespace overflowMath {
         }
 
         void fixMinMax(unsigned long int& minNum,
-            unsigned long int& maxNum) {
+                       unsigned long int& maxNum) {
             unsigned int holder;
             if (minNum > maxNum) {
                 holder = minNum;
