@@ -1,12 +1,12 @@
 # OverflowMath
-This library was made to handle math operations (like addition, subtraction,
-etc), without allowing the number to overflow or underflow.
+This library handles math operations (like addition, subtraction, etc.),
+without allowing the number to overflow or underflow.
 
 It is currently under development on GitHub at:
 https://github.com/Alejandro-Ramos/OverflowMath
 
-It is still in very early stages, but more will come soon.
-
+Addition, subtraction, multiplication, and division have been implemented so
+far, with more to come.
 
 ### MAINTAINERS
 
@@ -15,7 +15,7 @@ It is still in very early stages, but more will come soon.
 
 ### LICENSE
 
-This project will use the GNU LGPLv3. More information can be found in the
+This library uses the GNU LGPLv3. More information can be found in the
 LICENSE.txt file.
 
 --------------------------------
