@@ -16,7 +16,7 @@ far, with more to come.
 ### LICENSE
 
 This library uses the GNU LGPLv3. More information can be found in the
-LICENSE.txt file.
+COPYING and COPYING.LESSER files.
 
 --------------------------------
 
